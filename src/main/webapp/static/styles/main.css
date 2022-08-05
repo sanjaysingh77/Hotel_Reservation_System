@@ -1,0 +1,17 @@
+body {
+	font-family: 'Roboto', sans-serif;
+}
+
+header {
+	background-color: #f8f9fa;
+}
+
+.form-group.required label:after {
+  content:" *";
+  color: #f50b0b;
+}
+
+.error{
+	color: #f50b0b;
+}
+
