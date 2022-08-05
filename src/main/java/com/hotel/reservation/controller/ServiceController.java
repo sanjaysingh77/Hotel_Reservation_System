@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.hotel.reservation.service.TestService;
 import com.hotel.reservation.utils.DateUtil;
 import com.hotel.reservation.vo.InquiryFormVO;
 import com.hotel.reservation.vo.RoomBookingForm;
@@ -18,8 +17,6 @@ import com.hotel.reservation.vo.RoomBookingForm;
 @Controller
 public class ServiceController {
 	
-	@Autowired
-	private TestService testService;
 
 	
 	@RequestMapping(path = "/postInquiry", method = RequestMethod.POST)
@@ -30,7 +27,6 @@ public class ServiceController {
 			return "inquiry";
 		}
 		//Do the saving part here
-		testService.test();
 		
 		model.put("inquiryForm", inquiryForm);
 		return "inquiry-success";

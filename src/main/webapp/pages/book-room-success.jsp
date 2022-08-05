@@ -39,7 +39,7 @@
 
 </div>
 
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.js"></script>
 <script src="static/js/app.js"></script>
 
 <div ng-app="RoomPrice" ng-controller="RoomPriceController" 

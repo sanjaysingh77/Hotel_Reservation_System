@@ -25,7 +25,6 @@ public class PricingController {
 
 	@PostMapping(value = "/room-pricing")
 	public ResponseEntity<RoomPricingVO> getRoomPricing(@RequestBody RoomPricingVO roomPricing) {
-		System.out.println(roomPricing);
 		BigDecimal roomPrice = pricingService.calculateRoomPrice(roomPricing);
 		roomPricing.setPrice(roomPrice);
 		return ResponseEntity.ok(roomPricing);
