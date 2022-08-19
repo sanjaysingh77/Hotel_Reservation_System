@@ -1,5 +1,6 @@
 package com.hotel.reservation.vo;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 import javax.validation.Valid;
@@ -12,11 +13,12 @@ import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 public class RoomBookingForm {
 
+	private Long bookingId;
 	@Size(min=3, max=30, message = "First name must be between 3 and 30 characters")
 	private String firstName;
 	private String lastName;
 	@Valid
-	private Address address;
+	private AddressVO address;
 	@NotNull(message = "Mobile number must be provided")
 	private Long mobNumber;
 	@Email(regexp = ".+[@].+[\\.].+", message = "Valid email required")
@@ -31,7 +33,14 @@ public class RoomBookingForm {
 	@NotNull(message = "Please select number of guests")
 	private Integer numOfAdults;
 	private Integer children;
+	private BigDecimal price;
 	
+	public Long getBookingId() {
+		return bookingId;
+	}
+	public void setBookingId(Long bookingId) {
+		this.bookingId = bookingId;
+	}
 	public String getFirstName() {
 		return firstName;
 	}
@@ -44,10 +53,10 @@ public class RoomBookingForm {
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
-	public Address getAddress() {
+	public AddressVO getAddress() {
 		return address;
 	}
-	public void setAddress(Address address) {
+	public void setAddress(AddressVO address) {
 		this.address = address;
 	}
 	public Long getMobNumber() {
@@ -91,6 +100,12 @@ public class RoomBookingForm {
 	}
 	public void setChildren(Integer children) {
 		this.children = children;
+	}
+	public BigDecimal getPrice() {
+		return price;
+	}
+	public void setPrice(BigDecimal price) {
+		this.price = price;
 	}
 	
 }
