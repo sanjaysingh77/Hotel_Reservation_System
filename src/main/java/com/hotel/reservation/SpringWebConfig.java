@@ -12,11 +12,12 @@ import org.springframework.web.servlet.view.JstlView;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan({ "com.hotel.reservation" })
+@ComponentScan({ "com.hotel.reservation.controller" })
 public class SpringWebConfig implements WebMvcConfigurer {
 
 	@Bean
 	public ViewResolver viewResolver() {
+		
 		InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
 		viewResolver.setViewClass(JstlView.class);
 		viewResolver.setPrefix("/pages/");
@@ -29,5 +30,6 @@ public class SpringWebConfig implements WebMvcConfigurer {
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		registry.addResourceHandler("/static/**").addResourceLocations("/static/");
 	}
-
+	
+	
 }

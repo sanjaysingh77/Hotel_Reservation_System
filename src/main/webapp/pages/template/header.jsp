@@ -33,6 +33,9 @@
 					<a href="book-room" class="nav-link ${activeLink == 'book-room' ? 'active' :'' }">Book Room</a>
 				</li>
 				<li class="nav-item">
+					<a href="my-bookings" class="nav-link ${activeLink == 'my-bookings' ? 'active' :'' }">My Bookings</a>
+				</li>
+				<li class="nav-item">
 					<a href="about"class="nav-link ${activeLink == 'about' ? 'active' :'' }">About</a>
 				</li>
 			</ul>

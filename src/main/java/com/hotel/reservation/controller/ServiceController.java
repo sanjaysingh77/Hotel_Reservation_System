@@ -9,14 +9,25 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
-import com.hotel.reservation.utils.DateUtil;
+import com.hotel.reservation.entity.BookRoom;
+import com.hotel.reservation.entity.Inquiry;
+import com.hotel.reservation.mapper.BookRoomMapper;
+import com.hotel.reservation.mapper.InquiryMapper;
+import com.hotel.reservation.service.BookRoomService;
+import com.hotel.reservation.service.InquiryService;
 import com.hotel.reservation.vo.InquiryFormVO;
 import com.hotel.reservation.vo.RoomBookingForm;
 
 @Controller
 public class ServiceController {
 	
+	@Autowired
+	private InquiryService inquiryService;
+	
+	@Autowired
+	private BookRoomService bookRoomService;
 
 	
 	@RequestMapping(path = "/postInquiry", method = RequestMethod.POST)
@@ -26,9 +37,10 @@ public class ServiceController {
 		if(result.hasErrors()) {
 			return "inquiry";
 		}
-		//Do the saving part here
+		Long saveId = inquiryService.saveInquiry(InquiryMapper.voToEntity(inquiryForm));
+		Inquiry inquiry = inquiryService.getInquiryById(saveId);
 		
-		model.put("inquiryForm", inquiryForm);
+		model.put("inquiryForm", InquiryMapper.entityToVo(inquiry));
 		return "inquiry-success";
 	}
 	
@@ -39,11 +51,32 @@ public class ServiceController {
 		if(result.hasErrors()) {
 			return "book-room";
 		}
-		//Do the saving part here
+		Long saveId = bookRoomService.saveBookRoom(BookRoomMapper.voToEntity(roomBookingForm));
+		BookRoom bookRoomById = bookRoomService.getBookRoomById(saveId);
 		
-		model.put("roomBookingForm", roomBookingForm);
-		model.put("numOfDays", DateUtil.getNumberOfDays(roomBookingForm.getCheckIn(), roomBookingForm.getCheckOut()));
+		model.put("roomBookingForm", BookRoomMapper.entityToVo(bookRoomById));		
 		return "book-room-success";
+	}
+	
+	@RequestMapping(path = "/edit-booking", method = RequestMethod.POST)
+	public String editBooking(@RequestParam("bookingId") Long bookingId, ModelMap model) {
+		model.put("activeLink", "book-room");
+		BookRoom bookRoom = bookRoomService.getBookRoomById(bookingId); 
+		RoomBookingForm roomBookingForm = new RoomBookingForm();
+		if(bookRoom !=null) {
+			roomBookingForm = BookRoomMapper.entityToVo(bookRoom);
+		}
+		model.put("roomBookingForm", roomBookingForm);
+		return "book-room";
+	}
+	
+	@RequestMapping(path = "/delete-booking", method = RequestMethod.POST)
+	public String deleteBooking(@RequestParam("bookingId") Long bookingId, @RequestParam("email") String email, ModelMap model) {
+		model.put("activeLink", "my-bookings");
+		bookRoomService.deleteBookRoom(bookingId);
+		model.put("searchEmail", email);
+		model.put("myBookingList", BookRoomMapper.entityListToVoList(bookRoomService.getAllByEmail(email)));
+		return "my-bookings";
 	}
 	
 }

@@ -7,31 +7,31 @@
 
 	<table  class="table">
 		<tr>
-			<td>Name :</td>
+			<th>Name :</th>
 			<td>${roomBookingForm.firstName} ${roomBookingForm.lastName  } </td>
 		</tr>
 		<tr>
-			<td>Address :</td>
+			<th>Address :</th>
 			<td>
 				${roomBookingForm.address.address1}, ${roomBookingForm.address.address2} <br>
 				${roomBookingForm.address.city}, ${roomBookingForm.address.state}, ${roomBookingForm.address.zipCode}
 			</td>
 		</tr>
 		<tr>
-			<td>Contact :</td>
+			<th>Contact :</th>
 			<td>${roomBookingForm.mobNumber} / ${roomBookingForm.email}</td>
 		</tr>
 		
 		<tr>
-			<td>Check In / Check Out :</td>
+			<th>Check In / Check Out :</th>
 			<td><fmt:formatDate type="date" value="${roomBookingForm.checkIn}" /> / <fmt:formatDate type="date" value="${roomBookingForm.checkOut}" /> </td>
 		</tr>
 		<tr>
-			<td>Room Preference :</td>
+			<th>Room Preference :</th>
 			<td>${roomBookingForm.roomPreference}</td>
 		</tr>
 		<tr>
-			<td>Adults / Children :</td>
+			<th>Adults / Children :</th>
 			<td>${roomBookingForm.numOfAdults} / ${roomBookingForm.children}</td>
 		</tr>
 		
@@ -43,7 +43,7 @@
 <script src="static/js/app.js"></script>
 
 <div ng-app="RoomPrice" ng-controller="RoomPriceController" 
-	ng-init="init('${ roomBookingForm.roomPreference }','${ roomBookingForm.numOfAdults }', '${ roomBookingForm.children }','${ numOfDays }')">
+	ng-init="init('${ roomBookingForm.bookingId }')">
 	<jsp:include page="fetchRoomPrice.jsp"></jsp:include>
 </div>
 
