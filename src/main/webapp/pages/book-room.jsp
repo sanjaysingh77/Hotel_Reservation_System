@@ -8,6 +8,8 @@
 	<form:form method="POST" class="d-flex flex-column gap-4"
           action="bookRoom" modelAttribute="roomBookingForm">
 
+		<form:hidden path="bookingId"/>
+
 		<div class="row">
 			<div class="form-group required col-6">
 				<label for="name">First Name</label> 
@@ -52,7 +54,13 @@
 		<div class="row">
 			<div class="form-group required col-6">
 				<label for="email">Email</label> 
-				<form:input type="email" path="email" class="form-control" placeholder="Email" />
+				<c:if test="${ not empty roomBookingForm.bookingId }">
+					<form:hidden path="email"/> 
+					<input type="email" class="form-control" value="${roomBookingForm.email }" disabled="disabled" />
+				</c:if>
+				<c:if test="${ empty roomBookingForm.bookingId }">
+					<form:input type="email" path="email" class="form-control" placeholder="Email" />
+				</c:if>
 				<form:errors path="email" class="font-monospace error"/>
 			</div>
 			<div class="form-group required col-6">

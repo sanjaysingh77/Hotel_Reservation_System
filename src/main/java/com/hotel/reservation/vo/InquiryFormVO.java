@@ -7,6 +7,9 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 public class InquiryFormVO {
 
+	
+	private Long id;
+	
 	@Size(min=3, max=30, message = "Name must be between 3 and 30 characters")
 	private String name;
 	
@@ -18,6 +21,12 @@ public class InquiryFormVO {
 	@NotEmpty(message = "Please add some text")
 	private String inquiryText;
 	
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
 	public String getName() {
 		return name;
 	}
