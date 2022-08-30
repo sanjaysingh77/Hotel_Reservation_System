@@ -22,17 +22,12 @@ import com.hotel.reservation.vo.RoomPricingVO;
 @RequestMapping("api")
 public class ApiController {
 	
-	private final RoomPricingService pricingService;
-	private final BookRoomService bookRoomService;
-	private final InquiryService inquiryService;
-	
-	
-	public ApiController(RoomPricingService pricingService, BookRoomService bookRoomService,InquiryService inquiryService) {
-		super();
-		this.pricingService = pricingService;
-		this.bookRoomService = bookRoomService;
-		this.inquiryService = inquiryService;
-	}
+//	@Autowired
+	private RoomPricingService pricingService;
+//	@Autowired
+	private BookRoomService bookRoomService;
+//	@Autowired
+	private InquiryService inquiryService;
 	
 	@GetMapping(value = "/room-pricing/{id}")
 	public ResponseEntity<RoomPricingVO> getRoomDetail(@PathVariable("id") Long bookingId) {

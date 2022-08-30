@@ -2,14 +2,14 @@ var app = angular.module("AdminInquiry", []);
 
 app.controller("AdminInquiryController", function($scope, $http) {
 	
-	const baseUrl = 'http://localhost:8080/hotel-reservation/api';
+	const inquiryBaseUrl = 'http://localhost:8081/api/inquiry';
 	
 	$scope.deleteInquiry = function(inquiryId) {
 		console.log(inquiryId);
 		
 		$http({
 			method: 'DELETE',
-			url: `${baseUrl}/delete-inquiry/${inquiryId}`,
+			url: `${inquiryBaseUrl}/${inquiryId}`,
 			headers: {
 				'Content-Type': 'application/json'
 			}

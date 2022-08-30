@@ -5,26 +5,21 @@ import java.util.Properties;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
-import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-@Configuration
-@PropertySource("classpath:hibernate.properties")
-@EnableTransactionManagement
-@ComponentScan(basePackages = { "com.hotel.reservation" })
+//@Configuration
+//@PropertySource("classpath:hibernate.properties")
+//@EnableTransactionManagement
+//@ComponentScan(basePackages = { "com.hotel.reservation" })
 public class ApplicationContext {
 
 	@Autowired
 	private Environment environment;
 
-	@Bean
+//	@Bean
 	public LocalSessionFactoryBean sessionFactory() {
 		LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
 		sessionFactory.setDataSource(dataSource());
@@ -33,7 +28,7 @@ public class ApplicationContext {
 		return sessionFactory;
 	}
 
-	@Bean
+//	@Bean
 	public DataSource dataSource() {
 		DriverManagerDataSource dataSource = new DriverManagerDataSource();
 		dataSource.setDriverClassName(environment.getRequiredProperty("jdbc.driverClassName"));
@@ -52,7 +47,7 @@ public class ApplicationContext {
 		return properties;
 	}     
 
-	@Bean
+//	@Bean
 	public HibernateTransactionManager getTransactionManager() {
 		HibernateTransactionManager transactionManager = new HibernateTransactionManager();
 		transactionManager.setSessionFactory(sessionFactory().getObject());

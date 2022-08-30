@@ -5,7 +5,7 @@ app.controller("RoomPriceController", function($scope, $http) {
 	$scope.bookingId = null;
 	$scope.tableVisible = false;
 
-	const baseUrl = 'http://localhost:8080/hotel-reservation/api';
+	const pricingBaseUrl = 'http://localhost:8081/api/pricing';
 
 	$scope.init = function(bookingId) {
 		$scope.bookingId = bookingId;
@@ -16,7 +16,7 @@ app.controller("RoomPriceController", function($scope, $http) {
 		console.log($scope.bookingId)
 		$http({
 			method: 'GET',
-			url: `${baseUrl}/room-pricing/${$scope.bookingId}`,
+			url: `${pricingBaseUrl}/room-pricing/${$scope.bookingId}`,
 			headers: {
 				'Content-Type': 'application/json'
 			}
@@ -32,7 +32,7 @@ app.controller("RoomPriceController", function($scope, $http) {
 		
 		$http({
 			method: 'POST',
-			url: `${baseUrl}/confirm-booking`,
+			url: `${pricingBaseUrl}/confirm-booking`,
 			data: angular.toJson($scope.bookedRoom),
 			headers: {
 				'Content-Type': 'application/json'

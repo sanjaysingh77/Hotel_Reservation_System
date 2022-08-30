@@ -5,10 +5,8 @@ import java.util.stream.Collectors;
 
 import com.hotel.reservation.entity.Address;
 import com.hotel.reservation.entity.BookRoom;
-import com.hotel.reservation.entity.Inquiry;
 import com.hotel.reservation.utils.DateUtil;
 import com.hotel.reservation.vo.AddressVO;
-import com.hotel.reservation.vo.InquiryFormVO;
 import com.hotel.reservation.vo.RoomBookingForm;
 import com.hotel.reservation.vo.RoomPricingVO;
 

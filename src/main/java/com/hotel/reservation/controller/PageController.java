@@ -1,26 +1,26 @@
 package com.hotel.reservation.controller;
 
-import java.sql.SQLException;
 import java.util.Optional;
 
-import org.h2.tools.Server;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.client.RestTemplate;
 
-import com.hotel.reservation.mapper.BookRoomMapper;
-import com.hotel.reservation.service.BookRoomService;
+import com.hotel.reservation.utils.Constants;
 import com.hotel.reservation.vo.InquiryFormVO;
 import com.hotel.reservation.vo.RoomBookingForm;
+import com.hotel.reservation.vo.RoomBookingList;
 
 @Controller
 public class PageController {
 	
 	@Autowired
-	private BookRoomService bookRoomService;
+	private RestTemplate restTemplate;
 	
 	@RequestMapping(path = "/", method = RequestMethod.GET)
 	public String homePage(ModelMap model) {
@@ -53,7 +53,13 @@ public class PageController {
 		
 		if(email.isPresent()) {
 			model.put("searchEmail", email.get());
-			model.put("myBookingList", BookRoomMapper.entityListToVoList(bookRoomService.getAllByEmail(email.get())));
+			try {
+				ResponseEntity<RoomBookingList> responseEntity = restTemplate.getForEntity(Constants.bookingBaseUrl+"email?email="+email.get(), RoomBookingList.class);
+				model.put("myBookingList", responseEntity.getBody().getBookings());
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
 		}
 		model.put("activeLink", "my-bookings");
 		return "my-bookings";
